@@ -1,3 +1,10 @@
+function loadFont(name, url) {
+    let newFont = new FontFace(name, `url(${url})`);
+    newFont.load()
+        .then((loaded) => document.fonts.add(loaded))
+        .catch((error) => error);
+}
+loadFont('pixel', '/assets/pixel.ttf');
 let rope = 210;
 let add_rope = 30;
 let level = 0;

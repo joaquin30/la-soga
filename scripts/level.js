@@ -5,16 +5,16 @@ class Level extends Phaser.Scene {
 
     preload() {
         this.map_id = 'map' + (level+1).toString();
-        this.load.image('tiles', 'assets/wall.png');
-        this.load.tilemapTiledJSON(this.map_id, 'assets/level' + (level+1).toString() +'.json');
-        this.load.spritesheet('player1', 'assets/player1.png', {frameWidth: 16, frameHeight: 21});
-        this.load.spritesheet('player2', 'assets/player2.png', {frameWidth: 16, frameHeight: 21});
-        this.load.spritesheet('player1_set', 'assets/player1_set.png', {frameWidth: 16, frameHeight: 21});
-        this.load.spritesheet('player2_set', 'assets/player2_set.png', {frameWidth: 16, frameHeight: 21});
-        this.load.spritesheet('teleport', 'assets/teleport.png', {frameWidth: 16});
-        this.load.spritesheet('button', 'assets/button.png', {frameWidth: 16});
-        this.load.spritesheet('helix', 'assets/helix.png', {frameWidth: 16});
-        this.load.image('rope', 'assets/rope.png');
+        this.load.image('tiles', '/assets/wall.png');
+        this.load.tilemapTiledJSON(this.map_id, '/assets/level' + (level+1).toString() +'.json');
+        this.load.spritesheet('player1', '/assets/player1.png', {frameWidth: 16, frameHeight: 21});
+        this.load.spritesheet('player2', '/assets/player2.png', {frameWidth: 16, frameHeight: 21});
+        this.load.spritesheet('player1_set', '/assets/player1_set.png', {frameWidth: 16, frameHeight: 21});
+        this.load.spritesheet('player2_set', '/assets/player2_set.png', {frameWidth: 16, frameHeight: 21});
+        this.load.spritesheet('teleport', '/assets/teleport.png', {frameWidth: 16});
+        this.load.spritesheet('button', '/assets/button.png', {frameWidth: 16});
+        this.load.spritesheet('helix', '/assets/helix.png', {frameWidth: 16});
+        this.load.image('rope', '/assets/rope.png');
     }
 
     create() {

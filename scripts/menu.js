@@ -4,12 +4,12 @@ class Menu extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('tiles', 'assets/wall.png');
-        this.load.tilemapTiledJSON('map', 'assets/menu.json');
-        this.load.spritesheet('player1', 'assets/player1.png', {frameWidth: 16, frameHeight: 21});
-        this.load.spritesheet('player2', 'assets/player2.png', {frameWidth: 16, frameHeight: 21});
-        this.load.spritesheet('player1_set', 'assets/player1_set.png', {frameWidth: 16, frameHeight: 21});
-        this.load.spritesheet('player2_set', 'assets/player2_set.png', {frameWidth: 16, frameHeight: 21});
+        this.load.image('tiles', '/assets/wall.png');
+        this.load.tilemapTiledJSON('map', '/assets/menu.json');
+        this.load.spritesheet('player1', '/assets/player1.png', {frameWidth: 16, frameHeight: 21});
+        this.load.spritesheet('player2', '/assets/player2.png', {frameWidth: 16, frameHeight: 21});
+        this.load.spritesheet('player1_set', '/assets/player1_set.png', {frameWidth: 16, frameHeight: 21});
+        this.load.spritesheet('player2_set', '/assets/player2_set.png', {frameWidth: 16, frameHeight: 21});
     }
 
     create() {

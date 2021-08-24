@@ -4,11 +4,11 @@ class Loading extends Phaser.Scene {
     }
 
     preload() {
-        this.load.spritesheet('teleport', 'assets/teleport.png', {frameWidth: 16});
-        this.load.spritesheet('button', 'assets/button.png', {frameWidth: 16});
-        this.load.spritesheet('helix', 'assets/helix.png', {frameWidth: 16});
-        this.load.image('rope', 'assets/rope.png');
-        this.load.spritesheet('loading', 'assets/loading.png', {frameWidth: 70, frameHeight: 15});
+        this.load.spritesheet('teleport', '/assets/teleport.png', {frameWidth: 16});
+        this.load.spritesheet('button', '/assets/button.png', {frameWidth: 16});
+        this.load.spritesheet('helix', '/assets/helix.png', {frameWidth: 16});
+        this.load.image('rope', '/assets/rope.png');
+        this.load.spritesheet('loading', '/assets/loading.png', {frameWidth: 70, frameHeight: 15});
     }
 
     create() {

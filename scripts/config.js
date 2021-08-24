@@ -5,15 +5,16 @@ function loadFont(name, url) {
         .catch((error) => error);
 }
 loadFont('pixel', '/assets/pixel.ttf');
-let rope = 210;
-let add_rope = 30;
-let level = 0;
-const vel = 40;
+let rope = 200;
+const diff_rope = 40;
+let add_rope = 20;
+let level = 3;
+const vel = 50;
 const buttons = [
     [3,12,15,2],
-    [2,2,21,2],
-    [2,2,21,2],
-    [2,2,21,2],
+    [4,11,22,7],
+    [2,12,22,5],
+    [3,3,22,2],
     [2,2,21,2],
     [2,2,21,2],
     [2,2,21,2]
@@ -21,8 +22,8 @@ const buttons = [
 const teleports = [
     null,
     null,
-    [1,2,3,4,1],
-    [1,2,3,4,2],
+    [3,3,6,11,1],
+    [20,12,14,2,2],
     [1,2,3,4,1],
     [1,2,3,4,2],
     [2,2,21,2,1]
@@ -38,9 +39,9 @@ const helixs = [
 ];
 const ropes = [
     null,
-    [1,1],
+    [2,2],
     null,
-    [1,1],
+    [22,12],
     null,
     [1,1],
     null,

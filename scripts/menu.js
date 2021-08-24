@@ -19,8 +19,8 @@ class Menu extends Phaser.Scene {
         layer.setCollisionByProperty({collides: true});
         this.line = this.add.line(65, 0);
         this.line.setStrokeStyle(1, 0xffffff);
-        this.player1 = this.physics.add.sprite(6*16 + 8, 7*16 + 8, 'player1');
-        this.player2 = this.physics.add.sprite(18*16 + 8, 7*16 + 8, 'player2');
+        this.player1 = this.physics.add.sprite(6*16 + 8, 7*16 + 5.5, 'player1');
+        this.player2 = this.physics.add.sprite(18*16 + 8, 7*16 + 5.5, 'player2');
         this.anims.create({
             key: 'anim_player1',
             frames: this.anims.generateFrameNumbers('player1'),
@@ -63,8 +63,10 @@ class Menu extends Phaser.Scene {
         this.text = this.add.text(5, 5, '', {fontFamily: 'pixel', fontSize: 8});
         this.add.text(120, 50, 'LA SOGA', {fontFamily: 'pixel', fontSize: 24});
         this.add.text(125, 80, '¡Evita que se rompa!', {fontFamily: 'pixel', fontSize: 8});
-        this.add.text(64, 140, 'Usa las\nflechas para\nmoverte', {fontFamily: 'pixel', fontSize: 8});
-        this.add.text(256, 140, 'Presiona X\npara cambiar\nde personaje', {fontFamily: 'pixel', fontSize: 8});
+        this.add.text(60, 140, 'Usa las\nflechas para\nmoverte',
+            {fontFamily: 'pixel', fontSize: 8, align: 'center'});
+        this.add.text(250, 140, 'Presiona X\npara cambiar\nde personaje',
+            {fontFamily: 'pixel', fontSize: 8, align: 'center'});
         this.add.text(105, 190, 'Presiona Enter para jugar', {fontFamily: 'pixel', fontSize: 8});
     }
 

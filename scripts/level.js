@@ -60,8 +60,8 @@ class Level extends Phaser.Scene {
         // player
         this.line = this.add.line(65, 0);
         this.line.setStrokeStyle(1, 0xffffff);
-        this.player1 = this.physics.add.sprite(6*16 + 8, 7*16 + 5, 'player1');
-        this.player2 = this.physics.add.sprite(18*16 + 8, 7*16 + 5, 'player2');
+        this.player1 = this.physics.add.sprite(6*16 + 8, 7*16 + 5.5, 'player1');
+        this.player2 = this.physics.add.sprite(18*16 + 8, 7*16 + 5.5, 'player2');
         this.anims.create({
             key: 'anim_player1',
             frames: this.anims.generateFrameNumbers('player1'),
@@ -181,7 +181,7 @@ class Level extends Phaser.Scene {
         this.line.setTo(this.player1.body.x + 8, this.player1.body.y + 10,
             this.player2.body.x + 8, this.player2.body.y + 10);
         let d = this.distance();
-        if (d > rope + 60) {
+        if (d > rope + diff_rope) {
             this.scene.start('level');
         } else if (d > rope) {
             this.line.setStrokeStyle(1, 0xff0000);
@@ -192,6 +192,6 @@ class Level extends Phaser.Scene {
             if (this.warning.text !== '')
                 this.warning.text = '';
         }
-        this.text.setText(Math.round(d).toString() + ' max:' + (rope + 60).toString());
+        this.text.setText(Math.round(d).toString() + ' max:' + (rope + diff_rope).toString());
     }
 }

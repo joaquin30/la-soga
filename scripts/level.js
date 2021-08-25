@@ -160,10 +160,6 @@ class Level extends Phaser.Scene {
     }
 
     update() {
-        if (this.b1 && this.b2) {
-            level++;
-            this.scene.start('loading');
-        }
         if (helixs[level] !== null) {
             let p1 = {x: this.hx.body.x, y: this.hx.body.y},
                 p2 = {x: this.hx.body.x+10, y: this.hx.body.y+10},
@@ -213,5 +209,9 @@ class Level extends Phaser.Scene {
                 this.warning.text = '';
         }
         this.text.setText(Math.round(d).toString() + ' max:' + (rope + diff_rope).toString());
+        if (this.b1 && this.b2) {
+            level++;
+            this.scene.start('loading');
+        }
     }
 }

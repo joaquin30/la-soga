@@ -52,6 +52,7 @@ class Level extends Phaser.Scene {
             this.tp2.body.setSize(4, 4);
             this.tp2.body.setOffset(6, 6);
         }
+        this.b_add= false;
         if (ropes[level] !== null) {
             this.rp = this.physics.add.sprite(ropes[level][0]*16 + 8, ropes[level][1]*16 + 8, 'rope');
             this.rp.body.setSize(4, 4);
@@ -121,16 +122,26 @@ class Level extends Phaser.Scene {
         if (ropes[level] !== null) {
             this.physics.add.overlap(this.player1, this.rp, () => {
                 rope += add_rope;
+                this.b_add= true;
                 this.rp.destroy();
             });
             this.physics.add.overlap(this.player2, this.rp, () => {
                 rope += add_rope;
+                this.b_add= true;
                 this.rp.destroy();
             });
         }
         if (helixs[level] !== null) {
-            this.physics.add.overlap(this.player1, this.hx, () => this.scene.start('level'));
-            this.physics.add.overlap(this.player2, this.hx, () => this.scene.start('level'));
+            this.physics.add.overlap(this.player1, this.hx, () => {
+                if (this.b_add)
+                    rope -= add_rope;
+                this.scene.start('level');
+            });
+            this.physics.add.overlap(this.player2, this.hx, () => {
+                if (this.b_add)
+                    rope -= add_rope;
+                this.scene.start('level');
+            });
         }
         //set buttons
         this.b1 = false;
@@ -160,16 +171,6 @@ class Level extends Phaser.Scene {
     }
 
     update() {
-        if (helixs[level] !== null) {
-            let p1 = {x: this.hx.body.x, y: this.hx.body.y},
-                p2 = {x: this.hx.body.x+10, y: this.hx.body.y+10},
-                q1 = {x: this.hx.body.x, y: this.hx.body.y+10},
-                q2 = {x: this.hx.body.x+10, y: this.hx.body.y},
-                r1 = {x: this.player1.body.x+8, y: this.player1.body.y+10},
-                r2 = {x: this.player2.body.x+8, y: this.player2.body.y+10};
-            if (doLineSegmentsIntersect(r1,r2,p1,p2) || doLineSegmentsIntersect(r1,r2,q1,q2))
-                this.scene.start('level');
-        }
         if (this.cursors.left.isDown) {
             this.player.body.setVelocityX(-vel);
             this.player.body.setVelocityY(0);
@@ -197,7 +198,10 @@ class Level extends Phaser.Scene {
         this.line.setTo(this.player1.body.x + 8, this.player1.body.y + 10,
             this.player2.body.x + 8, this.player2.body.y + 10);
         let d = this.distance();
+        this.text.setText(Math.round(d).toString() + ' max:' + (rope + diff_rope).toString());
         if (d > rope + diff_rope) {
+            if (this.b_add)
+                rope -= add_rope;
             this.scene.start('level');
         } else if (d > rope) {
             this.line.setStrokeStyle(1, 0xff0000);
@@ -208,7 +212,19 @@ class Level extends Phaser.Scene {
             if (this.warning.text !== '')
                 this.warning.text = '';
         }
-        this.text.setText(Math.round(d).toString() + ' max:' + (rope + diff_rope).toString());
+        if (helixs[level] !== null) {
+            let p1 = {x: this.hx.body.x, y: this.hx.body.y},
+                p2 = {x: this.hx.body.x+10, y: this.hx.body.y+10},
+                q1 = {x: this.hx.body.x, y: this.hx.body.y+10},
+                q2 = {x: this.hx.body.x+10, y: this.hx.body.y},
+                r1 = {x: this.player1.body.x+8, y: this.player1.body.y+10},
+                r2 = {x: this.player2.body.x+8, y: this.player2.body.y+10};
+            if (doLineSegmentsIntersect(r1,r2,p1,p2) || doLineSegmentsIntersect(r1,r2,q1,q2)) {
+                if (this.b_add)
+                    rope -= add_rope;
+                this.scene.start('level');
+            }
+        }
         if (this.b1 && this.b2) {
             level++;
             this.scene.start('loading');

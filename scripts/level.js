@@ -57,6 +57,12 @@ class Level extends Phaser.Scene {
             this.rp.body.setSize(4, 4);
             this.rp.body.setOffset(6, 6);
         }
+        if (helixs[level] !== null) {
+            this.hx = this.physics.add.sprite(helixs[level][0]*16 + 8, helixs[level][1]*16 + 8, 'helix');
+            this.hx.body.setSize(10, 10);
+            this.hx.body.setOffset(3, 3);
+            this.hx.play('anim_helix');
+        }
         // player
         this.line = this.add.line(65, 0);
         this.line.setStrokeStyle(1, 0xffffff);
@@ -122,6 +128,10 @@ class Level extends Phaser.Scene {
                 this.rp.destroy();
             });
         }
+        if (helixs[level] !== null) {
+            this.physics.add.overlap(this.player1, this.hx, () => this.scene.start('level'));
+            this.physics.add.overlap(this.player2, this.hx, () => this.scene.start('level'));
+        }
         //set buttons
         this.b1 = false;
         this.b2 = false;
@@ -153,6 +163,16 @@ class Level extends Phaser.Scene {
         if (this.b1 && this.b2) {
             level++;
             this.scene.start('loading');
+        }
+        if (helixs[level] !== null) {
+            let p1 = {x: this.hx.body.x, y: this.hx.body.y},
+                p2 = {x: this.hx.body.x+10, y: this.hx.body.y+10},
+                q1 = {x: this.hx.body.x, y: this.hx.body.y+10},
+                q2 = {x: this.hx.body.x+10, y: this.hx.body.y},
+                r1 = {x: this.player1.body.x+8, y: this.player1.body.y+10},
+                r2 = {x: this.player2.body.x+8, y: this.player2.body.y+10};
+            if (doLineSegmentsIntersect(r1,r2,p1,p2) || doLineSegmentsIntersect(r1,r2,q1,q2))
+                this.scene.start('level');
         }
         if (this.cursors.left.isDown) {
             this.player.body.setVelocityX(-vel);

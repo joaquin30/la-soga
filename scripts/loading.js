@@ -68,6 +68,9 @@ class Loading extends Phaser.Scene {
             this.add.text(140, 120, 'Evita que los\npersonajes o la soga\ntoquen la hélice',
                 {fontFamily: 'pixel', fontSize: 8});
             break;
+        case 7:
+            this.scene.start('win');
+            break;
         default:
             this.add.text(170, 130, '¡Suerte!',
                 {fontFamily: 'pixel', fontSize: 8});

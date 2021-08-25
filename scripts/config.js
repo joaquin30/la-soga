@@ -8,7 +8,7 @@ loadFont('pixel', '/assets/pixel.ttf');
 let rope = 200;
 const diff_rope = 30;
 let add_rope = 20;
-let level = 1;
+let level = 0;
 const vel = 50;
 const buttons = [
     [3,12,15,2],

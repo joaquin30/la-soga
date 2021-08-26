@@ -3,7 +3,13 @@ class Win extends Phaser.Scene {
         super('win');
     }
 
-    update() {
+    preload() {
+        this.load.audio('snd_win', ['/assets/win.ogg']);
+    }
+
+    create() {
+        bg_music.stop()
+        this.sound.add('snd_win', {loop: false}).play();
         this.add.text(95, 50, '¡Ganaste!',
             {fontFamily: 'pixel', fontSize: 24});
         this.add.text(110, 90, 'Hecho por Joaquin Pino',

@@ -12,6 +12,7 @@ class Loading extends Phaser.Scene {
     }
 
     create() {
+        bg_music.stop();
         // objects
         this.anims.create({
             key: 'anim_tp',
@@ -79,7 +80,9 @@ class Loading extends Phaser.Scene {
     }
 
     update() {
-        if (this.key.isDown)
+        if (this.key.isDown) {
             this.scene.start('level');
+            bg_music.play();
+        }
     }
 }

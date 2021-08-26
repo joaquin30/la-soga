@@ -15,6 +15,11 @@ class Level extends Phaser.Scene {
         this.load.spritesheet('button', '/assets/button.png', {frameWidth: 16});
         this.load.spritesheet('helix', '/assets/helix.png', {frameWidth: 16});
         this.load.image('rope', '/assets/rope.png');
+        this.load.audio('snd_button', ['/assets/button.ogg']);
+        this.load.audio('snd_rope', ['/assets/rope.ogg']);
+        this.load.audio('snd_teleport', ['/assets/teleport.ogg']);
+        this.load.audio('snd_hit', ['/assets/hit.ogg']);
+        this.load.audio('snd_pass', ['/assets/pass.ogg']);
     }
 
     create() {
@@ -36,6 +41,8 @@ class Level extends Phaser.Scene {
             frameRate: 3,
             repeat: -1
         });
+        this.snd_btn = this.sound.add('snd_button', {loop: false});
+        this.snd_hit = this.sound.add('snd_hit', {loop: false});
         this.btn1 = this.physics.add.sprite(buttons[level][0]*16 + 8, buttons[level][1]*16 + 8, 'button');
         this.btn1.body.setSize(4, 4);
         this.btn1.body.setOffset(6, 6);
@@ -43,6 +50,7 @@ class Level extends Phaser.Scene {
         this.btn2.body.setSize(4, 4);
         this.btn2.body.setOffset(6, 6);
         if (teleports[level] !== null) {
+            this.snd_tp = this.sound.add('snd_teleport', {loop: false});
             this.tp1 = this.physics.add.sprite(teleports[level][0]*16 + 8, teleports[level][1]*16 + 8, 'teleport');
             this.tp2 = this.physics.add.sprite(teleports[level][2]*16 + 8, teleports[level][3]*16 + 8, 'teleport');
             this.tp1.play('anim_tp');
@@ -54,6 +62,7 @@ class Level extends Phaser.Scene {
         }
         this.b_add= false;
         if (ropes[level] !== null) {
+            this.snd_rp = this.sound.add('snd_rope', {loop: false});
             this.rp = this.physics.add.sprite(ropes[level][0]*16 + 8, ropes[level][1]*16 + 8, 'rope');
             this.rp.body.setSize(4, 4);
             this.rp.body.setOffset(6, 6);
@@ -111,12 +120,14 @@ class Level extends Phaser.Scene {
                 p.body.y = this.tp2.body.y;
                 this.tp2.body.checkCollision.none = true;
                 this.time.delayedCall(1000, () => this.tp2.body.checkCollision.none = false);
+                this.snd_tp.play();
             });
             this.physics.add.overlap(p, this.tp2, () => {
                 p.body.x = this.tp1.body.x;
                 p.body.y = this.tp1.body.y;
                 this.tp1.body.checkCollision.none = true;
                 this.time.delayedCall(1000, () => this.tp1.body.checkCollision.none = false);
+                this.snd_tp.play();
             });
         }
         if (ropes[level] !== null) {
@@ -124,20 +135,24 @@ class Level extends Phaser.Scene {
                 rope += add_rope;
                 this.b_add= true;
                 this.rp.destroy();
+                this.snd_rp.play();
             });
             this.physics.add.overlap(this.player2, this.rp, () => {
                 rope += add_rope;
                 this.b_add= true;
                 this.rp.destroy();
+                this.snd_rp.play();
             });
         }
         if (helixs[level] !== null) {
             this.physics.add.overlap(this.player1, this.hx, () => {
+                this.snd_hit.play();
                 if (this.b_add)
                     rope -= add_rope;
                 this.scene.start('level');
             });
             this.physics.add.overlap(this.player2, this.hx, () => {
+                this.snd_hit.play();
                 if (this.b_add)
                     rope -= add_rope;
                 this.scene.start('level');
@@ -147,11 +162,17 @@ class Level extends Phaser.Scene {
         this.b1 = false;
         this.b2 = false;
         this.physics.add.overlap(this.player1, this.btn1, () => {
-            this.btn1.setTexture('button', 1);
+            if (!this.b1) {
+                this.btn1.setTexture('button', 1);
+                this.snd_btn.play()
+            }
             this.b1 = true;
         });
         this.physics.add.overlap(this.player2, this.btn2, () => {
-            this.btn2.setTexture('button', 1);
+            if (!this.b2) {
+                this.btn2.setTexture('button', 1);
+                this.snd_btn.play()
+            }
             this.b2 = true;
         });
         // variables
@@ -202,6 +223,7 @@ class Level extends Phaser.Scene {
         if (d > rope + diff_rope) {
             if (this.b_add)
                 rope -= add_rope;
+            this.snd_hit.play();
             this.scene.start('level');
         } else if (d > rope) {
             this.line.setStrokeStyle(1, 0xff0000);
@@ -222,10 +244,14 @@ class Level extends Phaser.Scene {
             if (doLineSegmentsIntersect(r1,r2,p1,p2) || doLineSegmentsIntersect(r1,r2,q1,q2)) {
                 if (this.b_add)
                     rope -= add_rope;
+                this.snd_hit.play();
                 this.scene.start('level');
             }
         }
         if (this.b1 && this.b2) {
+            if (helixs[level] !== null)
+                this.snd_hx.stop();
+            this.sound.add('snd_pass', {loop: false}).play()
             level++;
             this.scene.start('loading');
         }

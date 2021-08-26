@@ -10,9 +10,12 @@ class Menu extends Phaser.Scene {
         this.load.spritesheet('player2', '/assets/player2.png', {frameWidth: 16, frameHeight: 21});
         this.load.spritesheet('player1_set', '/assets/player1_set.png', {frameWidth: 16, frameHeight: 21});
         this.load.spritesheet('player2_set', '/assets/player2_set.png', {frameWidth: 16, frameHeight: 21});
+        this.load.audio('snd_background', ['/assets/background.ogg']);
     }
 
     create() {
+        bg_music = this.sound.add('snd_background', {loop: true});
+        bg_music.play();
         const map = this.make.tilemap({key: 'map'});
         const tileset = map.addTilesetImage('wall', 'tiles');
         const layer = map.createLayer('Capa de patrones 1', tileset, 0, 0);
@@ -68,6 +71,10 @@ class Menu extends Phaser.Scene {
         this.add.text(250, 140, 'Presiona X\npara cambiar\nde personaje',
             {fontFamily: 'pixel', fontSize: 8, align: 'center'});
         this.add.text(105, 190, 'Presiona Enter para jugar', {fontFamily: 'pixel', fontSize: 8});
+    }
+
+    applyPipeline() {
+        this.cameras.main.setRenderToTexture(this.grayscalePipeline);
     }
 
     distance() {

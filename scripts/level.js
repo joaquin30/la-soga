@@ -164,16 +164,30 @@ class Level extends Phaser.Scene {
         this.physics.add.overlap(this.player1, this.btn1, () => {
             if (!this.b1) {
                 this.btn1.setTexture('button', 1);
-                this.snd_btn.play()
+                this.snd_btn.play();
+                this.b1 = true;
             }
-            this.b1 = true;
+        });
+        this.physics.add.overlap(this.player2, this.btn1, () => {
+            if (!this.b1) {
+                this.btn1.setTexture('button', 1);
+                this.snd_btn.play();
+                this.b1 = true;
+            }
         });
         this.physics.add.overlap(this.player2, this.btn2, () => {
             if (!this.b2) {
                 this.btn2.setTexture('button', 1);
-                this.snd_btn.play()
+                this.snd_btn.play();
+                this.b2 = true;
             }
-            this.b2 = true;
+        });
+        this.physics.add.overlap(this.player1, this.btn2, () => {
+            if (!this.b2) {
+                this.btn2.setTexture('button', 1);
+                this.snd_btn.play();
+                this.b2 = true;
+            }
         });
         // variables
         this.player = this.player1;
@@ -249,8 +263,6 @@ class Level extends Phaser.Scene {
             }
         }
         if (this.b1 && this.b2) {
-            if (helixs[level] !== null)
-                this.snd_hx.stop();
             this.sound.add('snd_pass', {loop: false}).play()
             level++;
             this.scene.start('loading');

@@ -241,8 +241,8 @@ class Level extends Phaser.Scene {
             this.scene.start('level');
         } else if (d > rope) {
             this.line.setStrokeStyle(1, 0xff0000);
-            if (this.warning.text !== '¡demasiado largo!')
-                this.warning.text = '¡demasiado largo!';
+            if (this.warning.text !== '¡demasiado larga!')
+                this.warning.text = '¡demasiado larga!';
         } else {
             this.line.setStrokeStyle(1, 0xffffff);
             if (this.warning.text !== '')

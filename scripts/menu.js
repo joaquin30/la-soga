@@ -4,13 +4,13 @@ class Menu extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('tiles', '/assets/wall.png');
-        this.load.tilemapTiledJSON('map', '/assets/menu.json');
-        this.load.spritesheet('player1', '/assets/player1.png', {frameWidth: 16, frameHeight: 21});
-        this.load.spritesheet('player2', '/assets/player2.png', {frameWidth: 16, frameHeight: 21});
-        this.load.spritesheet('player1_set', '/assets/player1_set.png', {frameWidth: 16, frameHeight: 21});
-        this.load.spritesheet('player2_set', '/assets/player2_set.png', {frameWidth: 16, frameHeight: 21});
-        this.load.audio('snd_background', ['/assets/background.ogg']);
+        this.load.image('tiles', 'assets/wall.png');
+        this.load.tilemapTiledJSON('map', 'assets/menu.json');
+        this.load.spritesheet('player1', 'assets/player1.png', {frameWidth: 16, frameHeight: 21});
+        this.load.spritesheet('player2', 'assets/player2.png', {frameWidth: 16, frameHeight: 21});
+        this.load.spritesheet('player1_set', 'assets/player1_set.png', {frameWidth: 16, frameHeight: 21});
+        this.load.spritesheet('player2_set', 'assets/player2_set.png', {frameWidth: 16, frameHeight: 21});
+        this.load.audio('snd_background', ['assets/background.ogg']);
     }
 
     create() {
@@ -63,7 +63,7 @@ class Menu extends Phaser.Scene {
         this.key = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
         this.continue = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
         this.vel = 40;
-        this.text = this.add.text(5, 5, '', {fontFamily: 'pixel', fontSize: 8});
+        this.text = this.add.text(15, 5, '', {fontFamily: 'pixel', fontSize: 8});
         this.add.text(120, 50, 'LA SOGA', {fontFamily: 'pixel', fontSize: 24});
         this.add.text(125, 80, '¡Evita que se rompa!', {fontFamily: 'pixel', fontSize: 8});
         this.add.text(60, 140, 'Usa las\nflechas para\nmoverte',
@@ -114,6 +114,6 @@ class Menu extends Phaser.Scene {
         }
         this.line.setTo(this.player1.body.x + 8, this.player1.body.y + 10,
             this.player2.body.x + 8, this.player2.body.y + 10);
-        this.text.setText(Math.round(this.distance()).toString() + ' max:∞');
+        this.text.setText(Math.round(this.distance()).toString() + 'm - max: ∞');
     }
 }

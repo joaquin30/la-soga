@@ -4,7 +4,7 @@ function loadFont(name, url) {
         .then((loaded) => document.fonts.add(loaded))
         .catch((error) => error);
 }
-loadFont('pixel', '/assets/pixel.ttf');
+loadFont('pixel', 'assets/pixel.ttf');
 let rope = 200;
 const diff_rope = 30;
 let add_rope = 20;

@@ -5,21 +5,21 @@ class Level extends Phaser.Scene {
 
     preload() {
         this.map_id = 'map' + (level+1).toString();
-        this.load.image('tiles', '/assets/wall.png');
-        this.load.tilemapTiledJSON(this.map_id, '/assets/level' + (level+1).toString() +'.json');
-        this.load.spritesheet('player1', '/assets/player1.png', {frameWidth: 16, frameHeight: 21});
-        this.load.spritesheet('player2', '/assets/player2.png', {frameWidth: 16, frameHeight: 21});
-        this.load.spritesheet('player1_set', '/assets/player1_set.png', {frameWidth: 16, frameHeight: 21});
-        this.load.spritesheet('player2_set', '/assets/player2_set.png', {frameWidth: 16, frameHeight: 21});
-        this.load.spritesheet('teleport', '/assets/teleport.png', {frameWidth: 16});
-        this.load.spritesheet('button', '/assets/button.png', {frameWidth: 16});
-        this.load.spritesheet('helix', '/assets/helix.png', {frameWidth: 16});
-        this.load.image('rope', '/assets/rope.png');
-        this.load.audio('snd_button', ['/assets/button.ogg']);
-        this.load.audio('snd_rope', ['/assets/rope.ogg']);
-        this.load.audio('snd_teleport', ['/assets/teleport.ogg']);
-        this.load.audio('snd_hit', ['/assets/hit.ogg']);
-        this.load.audio('snd_pass', ['/assets/pass.ogg']);
+        this.load.image('tiles', 'assets/wall.png');
+        this.load.tilemapTiledJSON(this.map_id, 'assets/level' + (level+1).toString() +'.json');
+        this.load.spritesheet('player1', 'assets/player1.png', {frameWidth: 16, frameHeight: 21});
+        this.load.spritesheet('player2', 'assets/player2.png', {frameWidth: 16, frameHeight: 21});
+        this.load.spritesheet('player1_set', 'assets/player1_set.png', {frameWidth: 16, frameHeight: 21});
+        this.load.spritesheet('player2_set', 'assets/player2_set.png', {frameWidth: 16, frameHeight: 21});
+        this.load.spritesheet('teleport', 'assets/teleport.png', {frameWidth: 16});
+        this.load.spritesheet('button', 'assets/button.png', {frameWidth: 16});
+        this.load.spritesheet('helix', 'assets/helix.png', {frameWidth: 16});
+        this.load.image('rope', 'assets/rope.png');
+        this.load.audio('snd_button', ['assets/button.ogg']);
+        this.load.audio('snd_rope', ['assets/rope.ogg']);
+        this.load.audio('snd_teleport', ['assets/teleport.ogg']);
+        this.load.audio('snd_hit', ['assets/hit.ogg']);
+        this.load.audio('snd_pass', ['assets/pass.ogg']);
     }
 
     create() {
@@ -233,7 +233,7 @@ class Level extends Phaser.Scene {
         this.line.setTo(this.player1.body.x + 8, this.player1.body.y + 10,
             this.player2.body.x + 8, this.player2.body.y + 10);
         let d = this.distance();
-        this.text.setText(Math.round(d).toString() + ' max:' + (rope + diff_rope).toString());
+        this.text.setText(Math.round(d).toString() + 'm - max: ' + (rope + diff_rope).toString() + 'm');
         if (d > rope + diff_rope) {
             if (this.b_add)
                 rope -= add_rope;

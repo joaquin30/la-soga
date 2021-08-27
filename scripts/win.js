@@ -4,7 +4,7 @@ class Win extends Phaser.Scene {
     }
 
     preload() {
-        this.load.audio('snd_win', ['/assets/win.ogg']);
+        this.load.audio('snd_win', ['assets/win.ogg']);
     }
 
     create() {

@@ -1,11 +1,6 @@
 # La Soga
 
-Juego de puzzles hecho en Javascript y [Phaser](https://phaser.io) para [Tu juego a juicio Jam 2021](https://itch.io/jam/tu-juego-a-juicio-jam-2021).
-
-- **Heroku demo:** <https://la-soga.herokuapp.com/>
-- **Página de itch.io:** <https://joaquin30.itch.io/la-soga>
-
-## Capturas de pantalla
+Videojuego de puzzles hecho con [Phaser](https://phaser.io) para [Tu juego a juicio Jam 2021](https://itch.io/jam/tu-juego-a-juicio-jam-2021). Juégalo en [itch.io](https://joaquin30.itch.io/la-soga).
 
 ![Captura de Pantalla 1](art/screenshot1.png)
 

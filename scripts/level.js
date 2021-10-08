@@ -241,8 +241,8 @@ class Level extends Phaser.Scene {
             this.scene.start('level');
         } else if (d > rope) {
             this.line.setStrokeStyle(1, 0xff0000);
-            if (this.warning.text !== '¡demasiado larga!')
-                this.warning.text = '¡demasiado larga!';
+            if (this.warning.text !== '¡demasiada larga!')
+                this.warning.text = '¡demasiada larga!';
         } else {
             this.line.setStrokeStyle(1, 0xffffff);
             if (this.warning.text !== '')
@@ -263,8 +263,9 @@ class Level extends Phaser.Scene {
             }
         }
         if (this.b1 && this.b2) {
-            this.sound.add('snd_pass', {loop: false}).play()
-            level++;
+            level++
+            if (level < 7)
+                this.sound.add('snd_pass', {loop: false}).play()
             this.scene.start('loading');
         }
     }

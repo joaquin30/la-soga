@@ -1,3 +1,3 @@
 #!/bin/sh
 mkdir -p build
-zip -r la-soga.zip scripts assets favicon.ico index.html
+zip -r build/la-soga.zip scripts assets favicon.ico index.html

@@ -1,10 +1,10 @@
-![Cover](art/cover.png)
+# La soga
 
 Videojuego de puzzles hecho con Phaser. Juégalo en <https://joaquin30.itch.io/la-soga>.
 
 ## Como jugar
 
-Ejecuta un servidor HTTP en la carpeta y navega a `index.html`. Por ejemplo, si tienes Python 3, ejecuta `python -m http.server`.
+Ejecuta un servidor HTTP en la carpeta y navega a `index.html`. Por ejemplo, si tienes Python 3, ejecuta `python -m http.server` en esta carpeta.
 
 ## Capturas
 
